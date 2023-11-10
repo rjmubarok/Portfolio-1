@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('qualifications', function (Blueprint $table) {
             $table->id();
-            $table->enum('type',['Education','Work']);
+            $table->enum('type', ['Education', 'Work']);
             $table->string('title');
             $table->string('association');
-            $table->string('description');
+            $table->longText('description');
             $table->string('from');
             $table->string('to');
             $table->timestamps();

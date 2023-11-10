@@ -31,23 +31,37 @@ class HomeController extends Controller
             'degree',
             'profile_pic',
             'birth_day',
-            'experience')->where('id',1)->first();
+            'experience'
+        )->where('id', 1)->first();
 
-        $experiences = Qualification::where('type',['Work'])->orderBy('id', 'desc')->take(3)->get();
-        $educations = Qualification::where('type',['Education'])->orderBy('id', 'desc')->take(3)->get();
+        $experiences = Qualification::where('type', ['Work'])->orderBy('id', 'desc')->take(3)->get();
+        $educations = Qualification::where('type', ['Education'])->orderBy('id', 'desc')->take(3)->get();
 
         $skills = Skill::orderBy('id', 'desc')->take(6)->get();
+        // return $skills;
+        // $sk = $skills->split($skills->count() / 3);
+        // $sk = count($skills) / 3;
+        // return $sk;
 
         $services = Service::take(6)->get();
 
         $categories = Category::all();
         $reviewers = Review::orderBy('id', 'desc')->take(5)->get();
 
-        $portfolios= Portfolio::with('category')->orderBy('id', 'desc')->take(6)->get();
+        $portfolios = Portfolio::with('category')->orderBy('id', 'desc')->take(6)->get();
 
         $setting = Setting::first();
 
-        return view('home',compact('user','experiences','educations','skills',
-                                    'services','categories','portfolios','setting','reviewers'));
+        return view('home', compact(
+            'user',
+            'experiences',
+            'educations',
+            'skills',
+            'services',
+            'categories',
+            'portfolios',
+            'setting',
+            'reviewers'
+        ));
     }
 }

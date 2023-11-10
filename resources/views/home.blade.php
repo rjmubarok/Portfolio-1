@@ -9,7 +9,7 @@
                 <div class="modal-body">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>        
+                    </button>
                     <!-- 16:9 aspect ratio -->
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always" allow="autoplay"></iframe>
@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 px-5 pl-lg-0 pb-5 pb-lg-0">
-                    <img class="img-fluid w-100 rounded-circle shadow-sm" src="{{ asset("storage/$user->profile_pic") }}" alt="">
+                    <img class="img-fluid w-100 rounded-circle shadow-sm" src="{{ asset($user->profile_pic) }}" alt="">
                 </div>
                 <div class="col-lg-7 text-center text-lg-left">
                     <h3 class="text-white font-weight-normal mb-3">I'm</h3>
@@ -92,7 +92,7 @@
                 <div class="col-lg-6">
                     <h3 class="mb-4">My Education</h3>
                     <div class="border-left border-primary pt-2 pl-4 ml-2">
-                        @foreach ($educations as $education)      
+                        @foreach ($educations as $education)
                         <div class="position-relative mb-4">
                             <i class="far fa-dot-circle text-primary position-absolute" style="top: 2px; left: -32px;"></i>
                             <h5 class="font-weight-bold mb-1">{{ $education->title }}</h5>
@@ -111,7 +111,7 @@
                             <h5 class="font-weight-bold mb-1">{{ $experience->title }}</h5>
                             <p class="mb-2"><strong>{{ $experience->association }}</strong> | <small>{{ $experience->from }} - {{ $experience->to }}</small></p>
                             <p>{{ $experience->description }}</p>
-                        </div>              
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -129,21 +129,22 @@
                 <h1 class="position-absolute text-uppercase text-primary">My Skills</h1>
             </div>
             <div class="row align-items-center">
-                @foreach($skills->split($skills->count()/3) as $row)
+                {{-- @foreach($skills as $row) --}}
+
                 <div class="col-md-6">
-                    @foreach($row as $skill)
+                    @foreach($skills as $skill)
                     <div class="skill mb-4">
                         <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-bold">{{ $skill->name }}</h6>
-                            <h6 class="font-weight-bold">{{$skill->percent}}%</h6>
+                            <h6 class="font-weight-bold">{{ $skill->name ??''}}</h6>
+                            <h6 class="font-weight-bold">{{$skill->percent ??''}}%</h6>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="{{$skill->percent}}" aria-valuemin="0" aria-valuemax="100" style="background-color: {{$skill->color}}"></div>
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{$skill->percent ??''}}" aria-valuemin="0" aria-valuemax="100" style="background-color: {{$skill->color ??''}}"></div>
                         </div>
                     </div>
                     @endforeach
                 </div>
-                @endforeach
+                {{-- @endforeach --}}
             </div>
         </div>
     </div>
@@ -165,7 +166,7 @@
                         <h4 class="font-weight-bold m-0">{{ $service->name }}</h4>
                     </div>
                     <p>{{ $service->description }}</p>
-                </div>          
+                </div>
             @endforeach
             </div>
         </div>
@@ -194,9 +195,9 @@
                 @foreach ($portfolios as $portfolio)
                 <div class="col-lg-4 col-md-6 mb-4 portfolio-item {{$portfolio->category->name }}">
                     <div class="position-relative overflow-hidden mb-2">
-                        <img class="img-fluid rounded w-100" src="{{ asset("storage/$portfolio->image") }}" alt="">
+                        <img class="img-fluid rounded w-100" src="{{ asset($portfolio->image) }}" alt="">
                         <div class="portfolio-btn bg-primary d-flex align-items-center justify-content-center">
-                            <a href="{{ asset("storage/$portfolio->image") }}" data-lightbox="portfolio">
+                            <a href="{{ asset($portfolio->image) }}" data-lightbox="portfolio">
                                 <i class="fa fa-plus text-white" style="font-size: 50px;"></i>
                             </a>
                             <a href="{{ $portfolio->project_url }}" data-lightbox="portfolio">
@@ -204,7 +205,7 @@
                             </a>
                         </div>
                     </div>
-                </div>    
+                </div>
                 @endforeach
             </div>
         </div>
@@ -229,7 +230,7 @@
                             <img class="img-fluid rounded-circle mx-auto mb-3" src="{{ asset("storage/$review->image") }}" style="width: 80px; height: 80px;">
                             <h5 class="font-weight-bold m-0">{{ $review->name }} </h5>
                             <span>{{ $review->job }}</span>
-                        </div>            
+                        </div>
                     @endforeach
                     </div>
                 </div>
